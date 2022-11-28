@@ -68,6 +68,7 @@ sns.barplot(x = 'quality', y = 'total sulfur dioxide', data = df)
 fig = plt.figure(figsize = (10,6))
 sns.barplot(x = 'quality', y = 'sulphates', data = df)
 
+#Checking quality results before applying our model
 #Alcohol level also goes higher as te quality of df increases
 fig = plt.figure(figsize = (10,6))
 sns.barplot(x = 'quality', y = 'alcohol', data = df)
