@@ -2,7 +2,7 @@
 """
 Created on Wed Nov 16 10:32:38 2022
 
-@author: tanguy
+@author: Tanguy, Killan et Fréderic
 """
 
 # First of all, we have to import the resuired libraries necessary 
