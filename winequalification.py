@@ -2,7 +2,7 @@
 """
 Created on Wed Nov 16 10:32:38 2022
 
-@author: Tanguy, Killan et Fréderic
+@author: Tanguy Robilliard, Killan Moal and Fréderic Forster
 """
 
 # First of all, we have to import the required libraries necessary 
@@ -21,6 +21,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score, KFold
+from sklearn import svm
 
 bad = [0,1,2,3,4,5,6]
 good = [7,8,9]
@@ -69,13 +70,14 @@ for modelname, Model, params_list in modelclasses:
         Y_prediction = model.predict(X_test)
         report = classification_report(y_test, Y_prediction)
         insights.append((modelname, model, params, report))
+        
 
 insights.sort(key=lambda x:x[-1], reverse=True)
 for modelname, model, params, report in insights:
     print(modelname, params)
     print(report)
 
-#Compute the cross validation
+# Compute the cross validation
 # scores_accuracy = cross_val_score(model, X, y, scoring='accuracy', cv=crossValidation, n_jobs=-1)
 # scores_recall = cross_val_score(model, X, y, scoring='recall', cv=crossValidation, n_jobs=-1)
 # scores_f1 = cross_val_score(model, X, y, scoring='f1', cv=crossValidation, n_jobs=-1)
@@ -87,8 +89,17 @@ for modelname, model, params, report in insights:
 # print(scores_f1)
 
 
+# tests de tanguy https://scikit-learn.org/stable/modules/cross_validation.html
+clf = svm.SVC(kernel ='linear', C=1).fit(X_train, y_train)
+clf.score(X_test, y_test)
 
+clf = svm.SVC(kernel='linear', C=1, random_state=42)
+scores = cross_val_score(clf, X, y, cv=5)
+scores
+print("%0.2f accuracy with a standard deviation of %0.2f" % (scores.mean(), scores.std()))
 
+scores = cross_val_score(clf, X, y, cv=5, scoring='f1_macro')
+scores
 
 
 
