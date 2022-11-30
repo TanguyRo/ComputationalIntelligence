@@ -22,7 +22,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Loading the Data from Kaggle CSV file to DataFrame format from Pandas Library
-df = pd.read_csv('winequality-red.csv')
+wine = pd.read_csv('winequality-red.csv')
 
 # In[Barplot]
 """
@@ -39,44 +39,43 @@ Getting Barplots from Seaborn Library for :
 """
 #Here we see that fixed acidity does not give any specification to classify the quality.
 fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'fixed acidity', data = df)
+sns.barplot(x = 'quality', y = 'fixed acidity', data = wine)
 
 #Here we see that its quite a downing trend in the volatile acidity as we go higher the quality 
 fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'volatile acidity', data = df)
+sns.barplot(x = 'quality', y = 'volatile acidity', data = wine)
 
-#Composition of citric acid go higher as we go higher in the quality of the df
+#Composition of citric acid go higher as we go higher in the quality of the wine
 fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'citric acid', data = df)
-
-fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'residual sugar', data = df)
-
-
-#Composition of chloride also go down as we go higher in the quality of the df
-fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'chlorides', data = df)
-
+sns.barplot(x = 'quality', y = 'citric acid', data = wine)
 
 fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'free sulfur dioxide', data = df)
+sns.barplot(x = 'quality', y = 'residual sugar', data = wine)
+
+#Composition of chloride also go down as we go higher in the quality of the wine
+fig = plt.figure(figsize = (10,6))
+sns.barplot(x = 'quality', y = 'chlorides', data = wine)
+
 
 fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'total sulfur dioxide', data = df)
+sns.barplot(x = 'quality', y = 'free sulfur dioxide', data = wine)
 
-#Sulphates level goes higher with the quality of df
 fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'sulphates', data = df)
+sns.barplot(x = 'quality', y = 'total sulfur dioxide', data = wine)
+
+#Sulphates level goes higher with the quality of wine
+fig = plt.figure(figsize = (10,6))
+sns.barplot(x = 'quality', y = 'sulphates', data = wine)
 
 #Checking quality results before applying our model
-#Alcohol level also goes higher as te quality of df increases
+#Alcohol level also goes higher as te quality of wine increases
 fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'alcohol', data = df)
+sns.barplot(x = 'quality', y = 'alcohol', data = wine)
 
 # In[Classification]
 
 #Making binary classificaion for the response variable.
-#Dividing df as good and bad by giving the limit for the quality
+#Dividing wine as good and bad by giving the limit for the quality
 
 # Using cut to segment and sort wine values into bins. 
 # Useful for going from a continuous variable to a categorical variable.
@@ -84,21 +83,21 @@ sns.barplot(x = 'quality', y = 'alcohol', data = df)
 # Setting values for the bins to sort it in 2 groups, Good wine and Bad wine
 bins = (2, 6.5, 8) 
 group_names = ['bad', 'good']
-df['quality'] = pd.cut(df['quality'], bins = bins, labels = group_names)
+wine['quality'] = pd.cut(wine['quality'], bins = bins, labels = group_names)
 
 # Using LabelEncoder Transformer from SKLearn Library to assign labels to quality variable
 label_quality = LabelEncoder()
 
 #Bad becomes 0 and good becomes 1 
-df['quality'] = label_quality.fit_transform(df['quality'])
+wine['quality'] = label_quality.fit_transform(wine['quality'])
 
-# df['quality'].value_counts()
+# wine['quality'].value_counts()
 
-sns.countplot(df['quality'])
+sns.countplot(wine['quality'])
 
 #Now seperate the dataset as response variable and feature variabes
-X = df.drop('quality', axis = 1) # X is now like DF without quality column
-y = df['quality'] 
+X = wine.drop('quality', axis = 1) # X is now like wine without quality column
+y = wine['quality'] 
 
 #Train and Test splitting of data 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
