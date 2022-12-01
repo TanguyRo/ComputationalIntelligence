@@ -141,11 +141,14 @@ support vector machines {'kernel': 'linear'}
    macro avg       0.43      0.50      0.46       320
 weighted avg       0.73      0.85      0.79       320
 
+Conclusion
 Random Forest is best classifier.
-However, SVM can't classify good wine.
-It's because the data is unbalanced (not enough good wine data).
+However, SVM can't classify good wine.It's because the data is unbalanced (not enough good wine data).
+Result are not interesting as long as there is still no balancing.
+
 -------------Test n°2-------------
 Test results for 10 fold cross validation:
+
 random forest {'criterion': 'gini'}
 mean accuracy score: 0.916
 mean recall score: 0.55
