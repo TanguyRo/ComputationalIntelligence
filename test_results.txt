@@ -1,0 +1,223 @@
+-------------Test n°1-------------
+Test result without cross validation 80% dataset for training and 20% for test:
+
+random forest {'criterion': 'entropy'}
+              precision    recall  f1-score   support
+
+           0       0.93      0.97      0.95       273
+           1       0.77      0.57      0.66        47
+
+    accuracy                           0.91       320
+   macro avg       0.85      0.77      0.80       320
+weighted avg       0.91      0.91      0.91       320
+
+random forest {'criterion': 'gini'}
+              precision    recall  f1-score   support
+
+           0       0.92      0.97      0.94       273
+           1       0.72      0.49      0.58        47
+
+    accuracy                           0.90       320
+   macro avg       0.82      0.73      0.76       320
+weighted avg       0.89      0.90      0.89       320
+
+k neighbors {'n_neighbors': 3}
+              precision    recall  f1-score   support
+
+           0       0.89      0.94      0.91       273
+           1       0.48      0.34      0.40        47
+
+    accuracy                           0.85       320
+   macro avg       0.69      0.64      0.66       320
+weighted avg       0.83      0.85      0.84       320
+
+k neighbors {'n_neighbors': 5}
+              precision    recall  f1-score   support
+
+           0       0.88      0.97      0.92       273
+           1       0.53      0.21      0.30        47
+
+    accuracy                           0.86       320
+   macro avg       0.70      0.59      0.61       320
+weighted avg       0.83      0.86      0.83       320
+
+support vector machines {'C': 0.9}
+              precision    recall  f1-score   support
+
+           0       0.86      1.00      0.92       273
+           1       1.00      0.02      0.04        47
+
+    accuracy                           0.86       320
+   macro avg       0.93      0.51      0.48       320
+weighted avg       0.88      0.86      0.79       320
+
+support vector machines {'C': 1}
+              precision    recall  f1-score   support
+
+           0       0.86      1.00      0.92       273
+           1       1.00      0.02      0.04        47
+
+    accuracy                           0.86       320
+   macro avg       0.93      0.51      0.48       320
+weighted avg       0.88      0.86      0.79       320
+
+support vector machines {'C': 1.1}
+              precision    recall  f1-score   support
+
+           0       0.86      1.00      0.92       273
+           1       1.00      0.02      0.04        47
+
+    accuracy                           0.86       320
+   macro avg       0.93      0.51      0.48       320
+weighted avg       0.88      0.86      0.79       320
+
+support vector machines {'C': 1.2}
+              precision    recall  f1-score   support
+
+           0       0.86      1.00      0.92       273
+           1       1.00      0.02      0.04        47
+
+    accuracy                           0.86       320
+   macro avg       0.93      0.51      0.48       320
+weighted avg       0.88      0.86      0.79       320
+
+support vector machines {'C': 1.3}
+              precision    recall  f1-score   support
+
+           0       0.86      1.00      0.92       273
+           1       1.00      0.02      0.04        47
+
+    accuracy                           0.86       320
+   macro avg       0.93      0.51      0.48       320
+weighted avg       0.88      0.86      0.79       320
+
+support vector machines {'C': 1.4}
+              precision    recall  f1-score   support
+
+           0       0.86      1.00      0.92       273
+           1       1.00      0.02      0.04        47
+
+    accuracy                           0.86       320
+   macro avg       0.93      0.51      0.48       320
+weighted avg       0.88      0.86      0.79       320
+
+support vector machines {'kernel': 'rbf'}
+              precision    recall  f1-score   support
+
+           0       0.86      1.00      0.92       273
+           1       1.00      0.02      0.04        47
+
+    accuracy                           0.86       320
+   macro avg       0.93      0.51      0.48       320
+weighted avg       0.88      0.86      0.79       320
+
+support vector machines {'C': 0.1}
+              precision    recall  f1-score   support
+
+           0       0.85      1.00      0.92       273
+           1       0.00      0.00      0.00        47
+
+    accuracy                           0.85       320
+   macro avg       0.43      0.50      0.46       320
+weighted avg       0.73      0.85      0.79       320
+
+support vector machines {'C': 0.8}
+              precision    recall  f1-score   support
+
+           0       0.85      1.00      0.92       273
+           1       0.00      0.00      0.00        47
+
+    accuracy                           0.85       320
+   macro avg       0.43      0.50      0.46       320
+weighted avg       0.73      0.85      0.79       320
+
+support vector machines {'kernel': 'linear'}
+              precision    recall  f1-score   support
+
+           0       0.85      1.00      0.92       273
+           1       0.00      0.00      0.00        47
+
+    accuracy                           0.85       320
+   macro avg       0.43      0.50      0.46       320
+weighted avg       0.73      0.85      0.79       320
+
+Random Forest is best classifier.
+However, SVM can't classify good wine.
+It's because the data is unbalanced (not enough good wine data).
+-------------Test n°2-------------
+Test results for 10 fold cross validation:
+random forest {'criterion': 'gini'}
+mean accuracy score: 0.916
+mean recall score: 0.55
+mean f1 score: 0.604
+ 
+random forest {'criterion': 'entropy'}
+mean accuracy score: 0.914
+mean recall score: 0.525
+mean f1 score: 0.628
+ 
+k neighbors {'n_neighbors': 3}
+mean accuracy score: 0.871
+mean recall score: 0.419
+mean f1 score: 0.462
+ 
+k neighbors {'n_neighbors': 5}
+mean accuracy score: 0.861
+mean recall score: 0.323
+mean f1 score: 0.382
+ 
+support vector machines {'C': 0.1}
+mean accuracy score: 0.864
+mean recall score: 0.0
+mean f1 score: 0.0
+ 
+support vector machines {'C': 0.8}
+mean accuracy score: 0.864
+mean recall score: 0.0
+mean f1 score: 0.0
+ 
+support vector machines {'C': 0.9}
+mean accuracy score: 0.866
+mean recall score: 0.01
+mean f1 score: 0.02
+ 
+support vector machines {'C': 1}
+mean accuracy score: 0.866
+mean recall score: 0.01
+mean f1 score: 0.02
+ 
+support vector machines {'C': 1.1}
+mean accuracy score: 0.866
+mean recall score: 0.01
+mean f1 score: 0.02
+ 
+support vector machines {'C': 1.2}
+mean accuracy score: 0.866
+mean recall score: 0.01
+mean f1 score: 0.02
+ 
+support vector machines {'C': 1.3}
+mean accuracy score: 0.866
+mean recall score: 0.01
+mean f1 score: 0.02
+ 
+support vector machines {'C': 1.4}
+mean accuracy score: 0.866
+mean recall score: 0.01
+mean f1 score: 0.02
+ 
+support vector machines {'kernel': 'linear'}
+mean accuracy score: 0.864
+mean recall score: 0.0
+mean f1 score: 0.0
+ 
+support vector machines {'kernel': 'rbf'}
+mean accuracy score: 0.866
+mean recall score: 0.01
+mean f1 score: 0.02
+
+Conclusion:
+The random forest seems to be the best classifier, but the recall scores for the SVM look suspicious.
+It's not normal for them to be 0.
+The f1 score equals 0 because he is computed from the recall score.
+It must be because the data is unbalanced.
