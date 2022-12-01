@@ -48,29 +48,52 @@ wine['quality'] = wine['quality'].apply(ratingToClass)
 X = wine.drop('quality', axis = 1) # X is now like DF without quality column
 y = wine['quality'] 
 
-# Params for the different model
-svc_params = [{"C":0.1}, {"C":0.8}, {"C":0.9}, {"C":1}, {"C":1.1}, {"C":1.2}, {"C":1.3}, {"C":1.4}, {'kernel':'rbf'}, {'kernel':'linear'}] #
-kneighbors_params = [{"n_neighbors":3}, {"n_neighbors":5}]
-rand_for_params = [{"criterion": "gini"}, {"criterion": "entropy"}]
-
 modelclasses = [
 #    ["log regression", LogisticRegression, log_reg_params],
 #    ["decision tree", DecisionTreeClassifier, dec_tree_params],
-    ["random forest", RandomForestClassifier, rand_for_params],
-    ["k neighbors", KNeighborsClassifier, kneighbors_params],
+    ["Random Forest", RandomForestClassifier, {'criterion': 'entropy', 'max_depth': 4, 'max_features': 'sqrt', 'n_estimators': 400, 'random_state': 18}],
+    ["K-Nearest Neighbors", KNeighborsClassifier, {'n_neighbors': 16}],
 #    ["naive bayes", GaussianNB, naive_bayes_params],
-    ["support vector machines", SVC, svc_params]
+    ["Support Vector Machines", SVC, {'C': 1.4, 'gamma': 1.3, 'kernel': 'rbf'}]
 ]
+
+# In[Hyperparameter Tuning]
+
+#Finding best parameters for our SVC model
+# paramSVC = {
+#     'C': [0.1,0.8,0.9,1,1.1,1.2,1.3,1.4],
+#     'kernel':['linear', 'rbf'],
+#     'gamma' :[0.1,0.8,0.9,1,1.1,1.2,1.3,1.4]
+#     }
+# paramRF = {
+#     'n_estimators': [200,300,400,500],
+#     'max_features': ['sqrt', 'log2'],
+#     'max_depth' : [4,5,6,7,8],
+#     'criterion' :["gini", "entropy"],
+#     'random_state' : [18]
+#     }
+# k_range = list(range(1, 31))
+# paramKNN = dict(n_neighbors=k_range)
+
+# # Grid Search CV pour chaque classifier
+# grid_SVC = GridSearchCV(SVC(), param_grid=paramSVC, scoring='accuracy', cv=10)
+# grid_SVC.fit(X, y)
+# best_param = grid_SVC.best_params_
+# print("Support Vector Machine",best_param) #Support Vector Machine {'C': 1.4, 'gamma': 1.3, 'kernel': 'rbf'}
+# grid_RF = GridSearchCV(RandomForestClassifier(), param_grid=paramRF, scoring='accuracy', cv=10)
+# grid_RF.fit(X, y)
+# print("Random Forest:",grid_RF.best_params_) #Random Forest: {'criterion': 'entropy', 'max_depth': 4, 'max_features': 'sqrt', 'n_estimators': 400, 'random_state': 18}
+# grid_KNN = GridSearchCV(KNeighborsClassifier(), param_grid=paramKNN, scoring='accuracy', cv=10)
+# grid_KNN.fit(X, y)
+# print("K-Nearest Neighbors:",grid_KNN.best_params_) #K-Nearest Neighbors: {'n_neighbors': 16}
 
 # In[Cross Validation unbalanced]
 
-# # Creating the KFold
+# Creating the KFold
 # crossValidation = KFold(n_splits=10, random_state=1, shuffle=True)
 
-
 # insights = []
-# for modelname, Model, params_list in modelclasses:
-#     for params in params_list:
+# for modelname, Model, params in modelclasses:
 #         model = Model(**params)
 #         scores = cross_val_score(model, X, y, cv = crossValidation, scoring=make_scorer(classification_report_with_accuracy_score))
 #         report = classification_report(originalclass, predictedclass)
@@ -87,8 +110,7 @@ modelclasses = [
 crossValidation = KFold(n_splits=10, random_state=1, shuffle=True)
 
 insights = []
-for modelname, Model, params_list in modelclasses:
-    for params in params_list:
+for modelname, Model, params in modelclasses:
         steps = [('over', RandomOverSampler()), ('model', Model(**params))]
         pipeline = Pipeline(steps=steps)
         scores = cross_val_score(pipeline, X, y, cv = crossValidation, scoring=make_scorer(classification_report_with_accuracy_score))
@@ -119,7 +141,6 @@ for modelname, params, report in insights:
 #     print(modelname, params)
 #     print(report)
 
-# tests de tanguy https://scikit-learn.org/stable/modules/cross_validation.html
 
 
 
