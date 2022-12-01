@@ -37,40 +37,40 @@ Getting Barplots from Seaborn Library for :
      - sulphates
      - alcohol
 """
-#Here we see that fixed acidity does not give any specification to classify the quality.
-fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'fixed acidity', data = wine)
+# #Here we see that fixed acidity does not give any specification to classify the quality.
+# fig = plt.figure(figsize = (10,6))
+# sns.barplot(x = 'quality', y = 'fixed acidity', data = wine)
 
-#Here we see that its quite a downing trend in the volatile acidity as we go higher the quality 
-fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'volatile acidity', data = wine)
+# #Here we see that its quite a downing trend in the volatile acidity as we go higher the quality 
+# fig = plt.figure(figsize = (10,6))
+# sns.barplot(x = 'quality', y = 'volatile acidity', data = wine)
 
-#Composition of citric acid go higher as we go higher in the quality of the wine
-fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'citric acid', data = wine)
+# #Composition of citric acid go higher as we go higher in the quality of the wine
+# fig = plt.figure(figsize = (10,6))
+# sns.barplot(x = 'quality', y = 'citric acid', data = wine)
 
-fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'residual sugar', data = wine)
+# fig = plt.figure(figsize = (10,6))
+# sns.barplot(x = 'quality', y = 'residual sugar', data = wine)
 
-#Composition of chloride also go down as we go higher in the quality of the wine
-fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'chlorides', data = wine)
+# #Composition of chloride also go down as we go higher in the quality of the wine
+# fig = plt.figure(figsize = (10,6))
+# sns.barplot(x = 'quality', y = 'chlorides', data = wine)
 
 
-fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'free sulfur dioxide', data = wine)
+# fig = plt.figure(figsize = (10,6))
+# sns.barplot(x = 'quality', y = 'free sulfur dioxide', data = wine)
 
-fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'total sulfur dioxide', data = wine)
+# fig = plt.figure(figsize = (10,6))
+# sns.barplot(x = 'quality', y = 'total sulfur dioxide', data = wine)
 
-#Sulphates level goes higher with the quality of wine
-fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'sulphates', data = wine)
+# #Sulphates level goes higher with the quality of wine
+# fig = plt.figure(figsize = (10,6))
+# sns.barplot(x = 'quality', y = 'sulphates', data = wine)
 
-#Checking quality results before applying our model
-#Alcohol level also goes higher as te quality of wine increases
-fig = plt.figure(figsize = (10,6))
-sns.barplot(x = 'quality', y = 'alcohol', data = wine)
+# #Checking quality results before applying our model
+# #Alcohol level also goes higher as te quality of wine increases
+# fig = plt.figure(figsize = (10,6))
+# sns.barplot(x = 'quality', y = 'alcohol', data = wine)
 
 # In[Classification]
 
