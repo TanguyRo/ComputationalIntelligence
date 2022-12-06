@@ -61,23 +61,25 @@ modelclasses = [
 
 # In[Hyperparameter Tuning]
 
-# List of possible parameter for our SVC model
-# paramSVC = {
-#     'C': [0.1,0.8,0.9,1,1.1,1.2,1.3,1.4],
-#     'kernel':['linear', 'rbf'],
-#     'gamma' :[0.1,0.8,0.9,1,1.1,1.2,1.3,1.4]
-#     }
-# List of possible parameter for our Random Forest model
-# paramRF = {
-#     'n_estimators': [200,300,400,500],
-#     'max_features': ['sqrt', 'log2'],
-#     'max_depth' : [4,5,6,7,8],
-#     'criterion' :["gini", "entropy"],
-#     'random_state' : [18]
-#     }
-# List of possible parameter for our K-Nearest Neighbors model
-# k_range = list(range(1, 31))
-# paramKNN = dict(n_neighbors=k_range)
+    # List of possible parameter for our SVC model
+    paramSVC = {
+        'C': [0.1,0.8,0.9,1,1.1,1.2,1.3,1.4],
+        'kernel':['linear', 'rbf'],
+        'gamma' :[0.1,0.8,0.9,1,1.1,1.2,1.3,1.4]
+        }
+    
+    # List of possible parameter for our Random Forest model
+    paramRF = {
+        'n_estimators': [200,300,400,500],
+        'max_features': ['sqrt', 'log2'],
+        'max_depth' : [4,5,6,7,8],
+        'criterion' :["gini", "entropy"],
+        'random_state' : [18]
+        }
+    
+    # List of possible parameter for our K-Nearest Neighbors model
+    k_range = list(range(1, 31))
+    paramKNN = dict(n_neighbors=k_range)
 
 # # Grid Search CV pour chaque classifier
 # grid_SVC = GridSearchCV(SVC(), param_grid=paramSVC, scoring='accuracy', cv=10)
