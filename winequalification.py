@@ -19,6 +19,8 @@ from sklearn.metrics import confusion_matrix, classification_report, accuracy_sc
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score, KFold
 from imblearn.over_sampling import RandomOverSampler
 from imblearn.pipeline import Pipeline
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
 
 bad = [0,1,2,3,4,5,6]
 good = [7,8,9]
@@ -59,12 +61,13 @@ modelclasses = [
 
 # In[Hyperparameter Tuning]
 
-#Finding best parameters for our SVC model
+# List of possible parameter for our SVC model
 # paramSVC = {
 #     'C': [0.1,0.8,0.9,1,1.1,1.2,1.3,1.4],
 #     'kernel':['linear', 'rbf'],
 #     'gamma' :[0.1,0.8,0.9,1,1.1,1.2,1.3,1.4]
 #     }
+# List of possible parameter for our Random Forest model
 # paramRF = {
 #     'n_estimators': [200,300,400,500],
 #     'max_features': ['sqrt', 'log2'],
@@ -72,6 +75,7 @@ modelclasses = [
 #     'criterion' :["gini", "entropy"],
 #     'random_state' : [18]
 #     }
+# List of possible parameter for our K-Nearest Neighbors model
 # k_range = list(range(1, 31))
 # paramKNN = dict(n_neighbors=k_range)
 
@@ -106,21 +110,21 @@ modelclasses = [
 
 # In[Cross Validation balanced]
 
-# Creating the KFold
-crossValidation = KFold(n_splits=10, random_state=1, shuffle=True)
+# # Creating the KFold
+# crossValidation = KFold(n_splits=10, random_state=1, shuffle=True)
 
-insights = []
-for modelname, Model, params in modelclasses:
-        steps = [('over', RandomOverSampler()), ('model', Model(**params))]
-        pipeline = Pipeline(steps=steps)
-        scores = cross_val_score(pipeline, X, y, cv = crossValidation, scoring=make_scorer(classification_report_with_accuracy_score))
-        report = classification_report(originalclass, predictedclass)
-        insights.append((modelname, params, report))
+# insights = []
+# for modelname, Model, params in modelclasses:
+#         steps = [('over', RandomOverSampler()), ('model', Model(**params))]
+#         pipeline = Pipeline(steps=steps)
+#         scores = cross_val_score(pipeline, X, y, cv = crossValidation, scoring=make_scorer(classification_report_with_accuracy_score))
+#         report = classification_report(originalclass, predictedclass)
+#         insights.append((modelname, params, report))
 
-# insights.sort(key=lambda x:x[-1], reverse=True)
-for modelname, params, report in insights:
-    print(modelname, params)
-    print(report)
+# # insights.sort(key=lambda x:x[-1], reverse=True)
+# for modelname, params, report in insights:
+#     print(modelname, params)
+#     print(report)
 
 # In[No Cross validation unbalanced]
 
@@ -141,33 +145,39 @@ for modelname, params, report in insights:
 #     print(modelname, params)
 #     print(report)
 
+# In[Artificial Neural Networks]
 
+# Split the dataset
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.34, random_state = 45)
 
+# Initialize the constructor
+model = Sequential()
+ 
+# Add an input layer
+model.add(Dense(16, activation ='relu', input_shape =(11, )))
+ 
+# Add one hidden layer
+model.add(Dense(14, activation ='relu'))
 
+# Add one hidden layer
+model.add(Dense(12, activation ='relu'))
 
+# Add one hidden layer
+model.add(Dense(10, activation ='relu'))
 
+# Add one hidden layer
+model.add(Dense(8, activation ='relu'))
+ 
+# Add an output layer
+model.add(Dense(1, activation ='relu'))
 
+print(model.summary())
+ 
+model.compile(loss ='binary_crossentropy', optimizer ='adam', metrics =['accuracy'])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Training Model
+model.fit(X_train, y_train, epochs = 100, batch_size = 32, verbose = 1)
+  
+# Predicting the Value
+y_pred = model.predict(X_test)
+print(y_pred)
