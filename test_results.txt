@@ -460,3 +460,9 @@ weighted avg       0.86      0.81      0.83      4797
 
 Conclusion:
 Le random forest reste le meilleur algo je pense mais ils se sont tous améliorés.
+
+-------------Test n°7-------------
+Test des baselines:
+Most frequent algorithm:{'accuracy': 0.41, 'recall': 0.16666666666666666, 'precision': 0.06833333333333333, 'f1_score': 0.09692671394799053}
+Uniform algorithm:{'accuracy': 0.16, 'recall': 0.16984363223809754, 'precision': 0.1567774452590194, 'f1_score': 0.11440071153626141}
+Stratified algorithm{'accuracy': 0.37, 'recall': 0.15560957569634867, 'precision': 0.15749142972373462, 'f1_score': 0.1561924278579868}
