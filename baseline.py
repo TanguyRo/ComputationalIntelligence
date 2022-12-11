@@ -39,8 +39,7 @@ wine = pd.read_csv('winequality-red.csv')
 X = wine.drop('quality', axis = 1) # X is now like DF without quality column
 y = wine['quality'] 
 
-#count of the target variable
-#sns.countplot(x='quality', data=wine)
+
 wine['quality'] = wine['quality'].apply(ratingToClass)
 
 #sns.countplot(x='quality', data=wine)
