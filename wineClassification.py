@@ -61,81 +61,98 @@ modelclasses = [
 
 # In[Hyperparameter Tuning]
 
-# # List of possible parameter for our SVC model
-# paramSVC = {
-#     'C': [0.1,0.8,0.9,1,1.1,1.2,1.3,1.4],
-#     'kernel':['linear', 'rbf'],
-#     'gamma' :[0.1,0.8,0.9,1,1.1,1.2,1.3,1.4]
-#     }
+# List of possible parameter for our SVC model
+paramSVC = {
+    'C': [0.1,0.8,0.9,1,1.1,1.2,1.3,1.4],
+    'kernel':['linear', 'rbf'],
+    'gamma' :[0.1,0.8,0.9,1,1.1,1.2,1.3,1.4]
+    }
 
-# # List of possible parameter for our Random Forest model
-# paramRF = {
-#     'n_estimators': [200,300,400,500],
-#     'max_features': ['sqrt', 'log2'],
-#     'max_depth' : [4,5,6,7,8],
-#     'criterion' :["gini", "entropy"],
-#     'random_state' : [18]
-#     }
+# List of possible parameter for our Random Forest model
+paramRF = {
+    'n_estimators': [200,300,400,500],
+    'max_features': ['sqrt', 'log2'],
+    'max_depth' : [4,5,6,7,8],
+    'criterion' :["gini", "entropy"],
+    'random_state' : [18]
+    }
 
-# # List of possible parameter for our K-Nearest Neighbors model
-# k_range = list(range(1, 31))
-# paramKNN = dict(n_neighbors=k_range)
+# List of possible parameter for our K-Nearest Neighbors model
+k_range = list(range(1, 31))
+paramKNN = dict(n_neighbors=k_range)
 
-# # List of possible parameter for our Decision Tree model
-# paramDT = {
-#           'max_features': ['auto', 'sqrt', 'log2'],
-#           'ccp_alpha': [0.1, .01, .001],
-#           'max_depth': [4,5,6,7,8,9,10,11,12,15,20,30,40,50,70,90,120,150],
-#           'criterion': ['gini', 'entropy']
-#           }
+# List of possible parameter for our Decision Tree model
+paramDT = {
+          'max_features': ['auto', 'sqrt', 'log2'],
+          'ccp_alpha': [0.1, .01, .001],
+          'max_depth': [4,5,6,7,8,9,10,11,12,15,20,30,40,50,70,90,120,150],
+          'criterion': ['gini', 'entropy']
+          }
 
-# # List of possible parameter for our Naive Bayes model
-# paramNB = {'var_smoothing': np.logspace(0,-9, num=100)}
+# List of possible parameter for our Naive Bayes model
+paramNB = {'var_smoothing': np.logspace(0,-9, num=100)}
 
-# # Grid Search CV pour SVC
-# grid_SVC = GridSearchCV(SVC(), param_grid=paramSVC, scoring='accuracy', cv=10)
-# grid_SVC.fit(X, y)
-# best_param = grid_SVC.best_params_
-# print("Support Vector Machine",best_param) #Support Vector Machine {'C': 1.4, 'gamma': 1.3, 'kernel': 'rbf'}
+# Grid Search CV pour SVC
+grid_SVC = GridSearchCV(SVC(), param_grid=paramSVC, scoring='accuracy', cv=10)
+grid_SVC.fit(X, y)
+best_param = grid_SVC.best_params_
+print("Support Vector Machine",best_param) #Support Vector Machine {'C': 1.4, 'gamma': 1.3, 'kernel': 'rbf'}
 
-# # Grid Search CV pour Random Forest
-# grid_RF = GridSearchCV(RandomForestClassifier(), param_grid=paramRF, scoring='accuracy', cv=10)
-# grid_RF.fit(X, y)
-# print("Random Forest:",grid_RF.best_params_) #Random Forest: {'criterion': 'entropy', 'max_depth': 4, 'max_features': 'sqrt', 'n_estimators': 400, 'random_state': 18}
+# Grid Search CV pour Random Forest
+grid_RF = GridSearchCV(RandomForestClassifier(), param_grid=paramRF, scoring='accuracy', cv=10)
+grid_RF.fit(X, y)
+print("Random Forest:",grid_RF.best_params_) #Random Forest: {'criterion': 'entropy', 'max_depth': 4, 'max_features': 'sqrt', 'n_estimators': 400, 'random_state': 18}
 
-# # Grid Search CV pour K-Nearest Neighbour
-# grid_KNN = GridSearchCV(KNeighborsClassifier(), param_grid=paramKNN, scoring='accuracy', cv=10)
-# grid_KNN.fit(X, y)
-# print("K-Nearest Neighbors:",grid_KNN.best_params_) #K-Nearest Neighbors: {'n_neighbors': 16}
+# Grid Search CV pour K-Nearest Neighbour
+grid_KNN = GridSearchCV(KNeighborsClassifier(), param_grid=paramKNN, scoring='accuracy', cv=10)
+grid_KNN.fit(X, y)
+print("K-Nearest Neighbors:",grid_KNN.best_params_) #K-Nearest Neighbors: {'n_neighbors': 16}
 
-# # Grid Search CV pour Decision Tree
-# grid_SVC = GridSearchCV(DecisionTreeClassifier(), param_grid=paramDT, scoring='accuracy', cv=10)
-# grid_SVC.fit(X, y)
-# best_param = grid_SVC.best_params_
-# print("Decision Tree",best_param)
+# Grid Search CV pour Decision Tree
+grid_SVC = GridSearchCV(DecisionTreeClassifier(), param_grid=paramDT, scoring='accuracy', cv=10)
+grid_SVC.fit(X, y)
+best_param = grid_SVC.best_params_
+print("Decision Tree",best_param)
 
-# # Grid Search CV pour Naives Bayes
-# grid_SVC = GridSearchCV(GaussianNB(), param_grid=paramNB, scoring='accuracy', cv=10)
-# grid_SVC.fit(X, y)
-# best_param = grid_SVC.best_params_
-# print("Naive Baye",best_param)
+# Grid Search CV pour Naives Bayes
+grid_SVC = GridSearchCV(GaussianNB(), param_grid=paramNB, scoring='accuracy', cv=10)
+grid_SVC.fit(X, y)
+best_param = grid_SVC.best_params_
+print("Naive Baye",best_param)
 
 # In[Cross Validation unbalanced]
 
-# # Creating the KFold
-# crossValidation = KFold(n_splits=10, random_state=1, shuffle=True)
+# Creating the KFold
+crossValidation = KFold(n_splits=10, random_state=1, shuffle=True)
 
-# insights = []
-# for modelname, Model, params in modelclasses:
-#         model = Model(**params)
-#         scores = cross_val_score(model, X, y, cv = crossValidation, scoring=make_scorer(classification_report_with_accuracy_score))
-#         report = classification_report(originalclass, predictedclass)
-#         insights.append((modelname, model, params, report))
+insights = []
+for modelname, Model, params in modelclasses:
+        model = Model(**params)
+        scores = cross_val_score(model, X, y, cv = crossValidation, scoring=make_scorer(classification_report_with_accuracy_score))
+        report = classification_report(originalclass, predictedclass)
+        insights.append((modelname, model, params, report))
  
-# #insights.sort(key=lambda x:x[-1], reverse=True)
-# for modelname, model, params, report in insights:
-#     print(modelname, params)
-#     print(report)
+#insights.sort(key=lambda x:x[-1], reverse=True)
+for modelname, model, params, report in insights:
+    print(modelname, params)
+    print(report)
+
+# In[Cross Validation balanced]
+
+# Creating the KFold
+crossValidation = KFold(n_splits=10, random_state=1, shuffle=True)
+insights = []
+
+for modelname, Model, params in modelclasses:
+        steps = [('over', RandomOverSampler()), ('model', Model(**params))]
+        pipeline = Pipeline(steps=steps)
+        scores = cross_val_score(pipeline, X, y, cv = crossValidation, scoring=make_scorer(classification_report_with_accuracy_score))
+        report = classification_report(originalclass, predictedclass)
+        insights.append((modelname, params, report))
+# insights.sort(key=lambda x:x[-1], reverse=True)
+for modelname, params, report in insights:
+    print(modelname, params)
+    print(report)
 
 # In[Artificial Neural Networks]
 
