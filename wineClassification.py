@@ -4,10 +4,6 @@ Created on Wed Nov 16 10:32:38 2022
 
 @author: Tanguy Robilliard, Killan Moal and Fréderic Forster
 """
-
-# First of all, we have to import the required libraries necessary 
-# Sklearn is necessary for using Artificial Intelligence
-# and SVC seems to be the best classifier to use according to the data we study
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -141,91 +137,7 @@ modelclasses = [
 #     print(modelname, params)
 #     print(report)
 
-# In[Cross Validation balanced]
-
-# # Creating the KFold
-# crossValidation = KFold(n_splits=10, random_state=1, shuffle=True)
-
-# insights = []
-# for modelname, Model, params in modelclasses:
-#         steps = [('over', RandomOverSampler()), ('model', Model(**params))]
-#         pipeline = Pipeline(steps=steps)
-#         scores = cross_val_score(pipeline, X, y, cv = crossValidation, scoring=make_scorer(classification_report_with_accuracy_score))
-#         report = classification_report(originalclass, predictedclass)
-#         insights.append((modelname, params, report))
-
-# # insights.sort(key=lambda x:x[-1], reverse=True)
-# for modelname, params, report in insights:
-#     print(modelname, params)
-#     print(report)
-
-# In[No Cross validation unbalanced]
-
-# Split the dataset
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
-
-# insights = []
-# for modelname, Model, params_list in modelclasses:
-#     for params in params_list:
-#         model = Model(**params)        
-#         model.fit(X_train, y_train)
-#         Y_prediction = model.predict(X_test)
-#         report = classification_report(y_test, Y_prediction)
-#         insights.append((modelname, model, params, report))
-
-# insights.sort(key=lambda x:x[-1], reverse=True)
-# for modelname, model, params, report in insights:
-#     print(modelname, params)
-#     print(report)
-
 # In[Artificial Neural Networks]
-
-# # Split the dataset
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.30, random_state = 42)
-
-# # Initialize the constructor
-# model = Sequential()
- 
-# # Add an input layer
-# model.add(Dense(16, activation ='relu', input_shape =(11, )))
- 
-# # Add an input layer 
-# model.add(Dense(12, activation='sigmoid', input_shape=(11,)))
-
-# # Add one hidden layer 
-# model.add(Dense(8, activation='sigmoid'))
-
-# # Add an output layer 
-# model.add(Dense(1, activation='sigmoid'))
-
-# print(model.summary())
- 
-# model.compile(loss ='binary_crossentropy', optimizer ='adam', metrics =['accuracy'])
-
-# history = model.fit(X_train, y_train,epochs=20, batch_size=1, verbose=1)
-
-# y_pred = np.round(model.predict(X_test))
-# print(y_pred[0:10])
-
-# loss, acc = model.evaluate(X_test, y_test, verbose=0)
-# print('Test Accuracy test: %.3f' % acc)
-# loss, acc = model.evaluate(X_train, y_train, verbose=0)
-# print('Test Accuracy train: %.3f' % acc)
-
-# print(pd.DataFrame(confusion_matrix(y_test, y_pred, labels=[0 ,1]), index=['true:Bad', 'true:Good'], columns=['pred:Bab', 'pred:Good']))
-
-
-# plt.subplot(211)
-# plt.title('Accuracy')
-# plt.plot(history.history['accuracy'], label='train')
-# plt.legend()
-
-# plt.subplot(211)
-# plt.title('Loss')
-# plt.plot(history.history['loss'], label='train')
-# plt.legend()
-
-# In[Artificial Neural Networks balanced]
 
 # Split the dataset and balance dataset
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.30, random_state = 42)
@@ -239,10 +151,10 @@ model = Sequential()
 model.add(Dense(16, activation ='relu', input_shape =(11, )))
  
 # Add an input layer 
-model.add(Dense(12, activation='sigmoid', input_shape=(11,)))
+model.add(Dense(12, activation='relu', input_shape=(11,)))
 
 # Add one hidden layer 
-model.add(Dense(8, activation='sigmoid'))
+model.add(Dense(8, activation='relu'))
 
 # Add an output layer 
 model.add(Dense(1, activation='sigmoid'))
@@ -262,7 +174,6 @@ loss, acc = model.evaluate(X_train, y_train, verbose=0)
 print('Test Accuracy train: %.3f' % acc)
 
 print(pd.DataFrame(confusion_matrix(y_test, y_pred, labels=[0 ,1]), index=['true:Bad', 'true:Good'], columns=['pred:Bab', 'pred:Good']))
-
 
 plt.subplot(211)
 plt.title('Accuracy')
